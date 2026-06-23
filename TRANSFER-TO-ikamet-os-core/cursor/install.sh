@@ -23,7 +23,7 @@ if [[ ! -d "$GITHUB_DIR" ]]; then
   exit 1
 fi
 
-echo "==> Ikamet Cursor ecosystem installer"
+echo "==> Ikamet Cursor ecosystem installer (v2026-06-23)"
 echo "    GitHub folder: $GITHUB_DIR"
 echo ""
 
