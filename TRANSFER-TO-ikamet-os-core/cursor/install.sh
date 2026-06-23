@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 # Ikamet Cursor ecosystem — one-time installer
 # Home: ikamet-os-core/cursor/install.sh
-# Run:  bash ~/GitHub/ikamet-os-core/cursor/install.sh
-set -euo pipefail
+# Run:  bash ~/Documents/GitHub/ikamet-os-core/cursor/install.sh
+# macOS ships bash 3.2 — avoid set -u (empty arrays are "unbound")
+set -eo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # ikamet-os-core/cursor → parent → ~/GitHub
@@ -48,11 +49,18 @@ for d in "$GITHUB_DIR"/*; do
   ALL_REPOS+=("$(basename "$d")")
 done
 
-# Merge known + discovered
+# Merge known + discovered (loop dedupe — safe on bash 3.2 with empty arrays)
 REPOS=()
+repo_already_added() {
+  local needle="$1" x
+  for x in "${REPOS[@]}"; do
+    [[ "$x" == "$needle" ]] && return 0
+  done
+  return 1
+}
 for r in "${KNOWN_REPOS[@]}" "${ALL_REPOS[@]}"; do
   [[ -d "$GITHUB_DIR/$r/.git" ]] || continue
-  [[ " ${REPOS[*]:-} " == *" $r "* ]] && continue
+  repo_already_added "$r" && continue
   REPOS+=("$r")
 done
 
