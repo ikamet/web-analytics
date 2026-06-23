@@ -1,0 +1,7 @@
+# Ikamet child repo — agent instructions
+
+> **Read first:** [`ikamet-os-core/DOCTRINE.md`](../ikamet-os-core/DOCTRINE.md) and [`ikamet-os-core/AGENTS.md`](../ikamet-os-core/AGENTS.md)
+>
+> Workspace: open **`ikamet.code-workspace`** in the parent `GitHub/` folder — not this repo alone.
+>
+> All Ikamet repos are one ecosystem. Check sibling folders before changing this repo.

@@ -1,0 +1,12 @@
+---
+description: Master Ikamet OS rules — canonical copy lives in ikamet-os-core
+alwaysApply: true
+---
+
+You are in **ikamet-os-core** — the root of the Ikamet ecosystem.
+
+Other repos import rules from here. When updating architecture or agent behaviour, update `DOCTRINE.md` and `AGENTS.md` in this repo first, then run:
+
+`bash ~/GitHub/web-analytics/cursor-ecosystem/install.sh`
+
+All child repos under `~/GitHub/` are in the same Cursor workspace (`ikamet.code-workspace`).
