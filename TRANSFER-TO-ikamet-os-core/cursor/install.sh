@@ -8,8 +8,12 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # ikamet-os-core/cursor → parent → ~/GitHub
 GITHUB_DIR="${1:-$(cd "$SCRIPT_DIR/../.." && pwd)}"
 
-if [[ "${1:-}" == "" && -d "$HOME/GitHub" ]]; then
-  GITHUB_DIR="$HOME/GitHub"
+if [[ "${1:-}" == "" ]]; then
+  if [[ -d "$HOME/Documents/GitHub" ]]; then
+    GITHUB_DIR="$HOME/Documents/GitHub"
+  elif [[ -d "$HOME/GitHub" ]]; then
+    GITHUB_DIR="$HOME/GitHub"
+  fi
 fi
 
 if [[ ! -d "$GITHUB_DIR" ]]; then
@@ -37,8 +41,12 @@ KNOWN_REPOS=(
   web-analytics
 )
 
-# Discover all git repos in GitHub folder
-mapfile -t ALL_REPOS < <(find "$GITHUB_DIR" -maxdepth 1 -mindepth 1 -type d -exec test -d '{}/.git' \; -print | xargs -I{} basename {} | sort -u)
+# Discover all git repos in GitHub folder (macOS bash 3.2 compatible — no mapfile)
+ALL_REPOS=()
+for d in "$GITHUB_DIR"/*; do
+  [[ -d "$d/.git" ]] || continue
+  ALL_REPOS+=("$(basename "$d")")
+done
 
 # Merge known + discovered
 REPOS=()
@@ -124,7 +132,7 @@ If an agent says it cannot see other repos, remind it: *"We use ikamet.code-work
 ## Re-run installer after adding a new repo
 
 ```bash
-bash ~/GitHub/ikamet-os-core/cursor/install.sh
+bash ~/Documents/GitHub/ikamet-os-core/cursor/install.sh
 ```
 
 ## Cloud Agents (cursor.com background agents)
