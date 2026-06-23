@@ -1,5 +1,7 @@
 # Web Analytics template for Tinybird
 
+> **Ikamet:** Ecosystem setup lives in **`ikamet-os-core/cursor`**. Read [`ikamet-os-core/DOCTRINE.md`](../ikamet-os-core/DOCTRINE.md) before changes.
+
 Build your own web analytics platform using [Tinybird](https://www.tinybird.co/)'s Events API and Endpoints. Built with privacy and speed as top priorities, this template lets you get real-time metrics in a pre-built dashboard in just a few minutes without any knowledge about Tinybird.
 
 After you've finished the basic setup, expand your analytics with custom events tailored to your specific use cases (eCommerce, marketing, etc.), keeping the same real-time performance.
