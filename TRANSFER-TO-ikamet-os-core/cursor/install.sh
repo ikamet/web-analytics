@@ -52,7 +52,7 @@ done
 REPOS=()
 for r in "${KNOWN_REPOS[@]}" "${ALL_REPOS[@]}"; do
   [[ -d "$GITHUB_DIR/$r/.git" ]] || continue
-  [[ " ${REPOS[*]} " == *" $r "* ]] && continue
+  [[ " ${REPOS[*]:-} " == *" $r "* ]] && continue
   REPOS+=("$r")
 done
 
