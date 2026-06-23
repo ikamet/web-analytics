@@ -1,6 +1,6 @@
 # Web Analytics template for Tinybird
 
-> **Ikamet team:** This repo is part of the Ikamet OS ecosystem. Open **`~/GitHub/ikamet.code-workspace`** in Cursor (not this repo alone). First-time Mac setup: [`cursor-ecosystem/README.md`](./cursor-ecosystem/README.md). Read [`ikamet-os-core`](../ikamet-os-core/DOCTRINE.md) before changes.
+> **Ikamet:** Ecosystem setup lives in **`ikamet-os-core/cursor`**. Read [`ikamet-os-core/DOCTRINE.md`](../ikamet-os-core/DOCTRINE.md) before changes.
 
 Build your own web analytics platform using [Tinybird](https://www.tinybird.co/)'s Events API and Endpoints. Built with privacy and speed as top priorities, this template lets you get real-time metrics in a pre-built dashboard in just a few minutes without any knowledge about Tinybird.
 

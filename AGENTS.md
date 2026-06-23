@@ -1,35 +1,21 @@
 # web-analytics — Agent Instructions
 
-Tinybird web analytics data project, flock.js tracker, and dashboard for the Ikamet ecosystem.
+Tinybird data project, flock.js tracker, and dashboard.
 
-> **Read first:** `../ikamet-os-core/DOCTRINE.md` and `../ikamet-os-core/AGENTS.md` (or `CLAUDE.md`) before any change.
+> **Read first:** [`ikamet-os-core/DOCTRINE.md`](../ikamet-os-core/DOCTRINE.md) and [`ikamet-os-core/AGENTS.md`](../ikamet-os-core/AGENTS.md)
 >
-> This repo is one piece of a multi-repo system. Do not work in isolation.
+> Cursor workspace: **`~/GitHub/ikamet.code-workspace`** (setup: `ikamet-os-core/cursor/install.sh`)
 
 ## This repo
 
 | Path | Purpose |
 |------|---------|
-| `tinybird/` | Tinybird datasources, pipes, deploy with `tb --cloud deploy` |
-| `middleware/` | `@tinybirdco/flock.js` browser tracker source |
-| `dashboard/` | Analytics dashboard (Next.js) |
-
-## Sibling repos (same parent `GitHub/` folder)
-
-| Repo | Purpose |
-|------|---------|
-| `ikamet-os-core` | **Source of truth** — doctrine, architecture, agent rules |
-| `site-ikamet` | ikamet.com (Ghost CMS) |
-| `site-ikametsigorta` | ikametsigorta.com |
-| `app-api` | api.ikamet.com |
-| `app-web` | app.ikamet.com |
-| `app-admin` | ops.ikamet.com |
-| `docs-ikamet` | Documentation |
-| `site-ikametstaff` | Staff site |
-
-When fixing analytics: check **this repo** (Tinybird schema/deploy) **and** `site-ikamet` (Ghost `ghost-stats` + flock.js injection).
+| `tinybird/` | Deploy with `tb --cloud deploy` |
+| `middleware/` | flock.js tracker source |
+| `dashboard/` | Analytics dashboard |
 
 ## Live Tinybird
 
 - Host: `https://api.europe-west2.gcp.tinybird.co`
 - Datasource: `analytics_events`
+- Ghost tracking: see `site-ikamet`

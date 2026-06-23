@@ -1,15 +1,12 @@
 #!/usr/bin/env bash
 # Ikamet Cursor ecosystem — one-time installer
-# Run from your Mac:  bash ~/GitHub/web-analytics/cursor-ecosystem/install.sh
+# Home: ikamet-os-core/cursor/install.sh
+# Run:  bash ~/GitHub/ikamet-os-core/cursor/install.sh
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-GITHUB_DIR="${1:-$(cd "$SCRIPT_DIR/../.." 2>/dev/null && pwd || true)}"
-
-# If run from inside web-analytics, parent of parent is usually GitHub/
-if [[ ! -d "$GITHUB_DIR/ikamet-os-core" && -d "$SCRIPT_DIR/../../ikamet-os-core" ]]; then
-  GITHUB_DIR="$(cd "$SCRIPT_DIR/../.." && pwd)"
-fi
+# ikamet-os-core/cursor → parent → ~/GitHub
+GITHUB_DIR="${1:-$(cd "$SCRIPT_DIR/../.." && pwd)}"
 
 if [[ "${1:-}" == "" && -d "$HOME/GitHub" ]]; then
   GITHUB_DIR="$HOME/GitHub"
@@ -127,7 +124,7 @@ If an agent says it cannot see other repos, remind it: *"We use ikamet.code-work
 ## Re-run installer after adding a new repo
 
 ```bash
-bash ~/GitHub/web-analytics/cursor-ecosystem/install.sh
+bash ~/GitHub/ikamet-os-core/cursor/install.sh
 ```
 
 ## Cloud Agents (cursor.com background agents)

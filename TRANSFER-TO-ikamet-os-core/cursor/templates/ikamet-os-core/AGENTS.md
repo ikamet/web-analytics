@@ -43,5 +43,5 @@ analytics               web-analytics (Tinybird)
 Re-sync all repos after adding a new one:
 
 ```bash
-bash ~/GitHub/web-analytics/cursor-ecosystem/install.sh
+bash ~/GitHub/ikamet-os-core/cursor/install.sh
 ```
