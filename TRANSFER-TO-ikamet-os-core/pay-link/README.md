@@ -1,46 +1,47 @@
-# Pay / referral links for app.ikamet.com
+# Branded redirect → Wise invite link
 
-Copy into **`app-web`** (and wire **`app-api`** if checkout needs the slug server-side).
+**Not a payment system.** One URL under your brand that sends people to your Wise referral link.
 
-## Recommended design (Wise-style)
+| Your link | Goes to |
+|-----------|---------|
+| `https://app.ikamet.com/pay/christophera7` | `https://wise.com/invite/dic/christophera7` |
 
-| URL | Purpose |
-|-----|---------|
-| `https://app.ikamet.com/pay/christophera7` | Customer pays; `christophera7` = partner/referrer slug |
-| `https://app.ikamet.com/invite/christophera7` | Same attribution, signup-first wording (optional alias) |
+## Fastest: add to `app-web/next.config.js`
 
-Both set a **90-day cookie** `ikamet_ref` and send the user to checkout (or home if checkout path unknown).
+Open `app-web/next.config.js` and add inside `module.exports` (merge with existing `redirects` if you already have one):
 
-## Install in app-web
-
-From your Mac, in the **ikamet workspace** Cursor window, paste this to the agent:
-
-> Copy `web-analytics/TRANSFER-TO-ikamet-os-core/pay-link/app-web/*` into `app-web` following the folder structure. Merge with existing checkout: read checkout route first, pass `ref` query or cookie into payment API. Do not break existing Stripe/payment flow.
-
-Or manually:
-
-```bash
-cd ~/Documents/GitHub
-# adjust paths if your checkout lives elsewhere
-cp -r web-analytics/TRANSFER-TO-ikamet-os-core/pay-link/app-web/app/pay app-web/app/
-cp -r web-analytics/TRANSFER-TO-ikamet-os-core/pay-link/app-web/app/invite app-web/app/
-cp web-analytics/TRANSFER-TO-ikamet-os-core/pay-link/app-web/lib/referral.ts app-web/lib/
+```js
+async redirects() {
+  return [
+    {
+      source: '/pay/christophera7',
+      destination: 'https://wise.com/invite/dic/christophera7',
+      permanent: false,
+    },
+  ]
+},
 ```
 
-Then in `app-web`:
+Deploy `app-web`. Done.
 
-1. Set `NEXT_PUBLIC_CHECKOUT_PATH` in `.env` (e.g. `/checkout` or your real path).
-2. In checkout/payment code, read `ikamet_ref` cookie (or `?ref=` query) and send to `app-api`.
-3. Deploy `app-web`.
+## Alternative: `vercel.json` in app-web root
 
-## app-api (follow-up)
+```json
+{
+  "redirects": [
+    {
+      "source": "/pay/christophera7",
+      "destination": "https://wise.com/invite/dic/christophera7",
+      "permanent": false
+    }
+  ]
+}
+```
 
-When creating a payment session, include `referral_slug` from cookie so ops can attribute revenue.
+## Paste into local Cursor (app-web)
 
-Example body field: `{ "referral_slug": "christophera7" }`
+> Add a single redirect: `/pay/christophera7` → `https://wise.com/invite/dic/christophera7` in next.config.js (or vercel.json). Nothing else — no cookies, no checkout, no API changes. Deploy app-web.
 
-## Examples
+## More slugs later
 
-- `https://app.ikamet.com/pay/christophera7`
-- `https://app.ikamet.com/pay/innogo`
-- `https://app.ikamet.com/invite/christophera7`
+Duplicate the redirect block with a new `source` and `destination` for each person. No code beyond that unless you want many links.
